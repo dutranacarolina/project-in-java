@@ -10,5 +10,13 @@ public class trabalhoNo {
      static ArrayList<String> aprovados = new ArrayList<>(); 
      static ArrayList<String> reprovados = new ArrayList<>(); 
      static Scanner sc = new Scanner(System.in);
+
+     // Função para cadastrar Aluno
+      public static void cadastrarAluno(String[] nomes){
+        for (int i=0; i < nomes.length; i++){
+            System.out.print("Digite o nome do aluno " + (i+1) + ": ");
+            nomes[i] = sc.nextLine();
+        }
+     }
      
 }
