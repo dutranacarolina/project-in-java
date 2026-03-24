@@ -26,5 +26,46 @@ public class trabalhoNo {
             materia[i] = sc.nextLine();
         }
      }
+    
+     // Função para Cadastrar Notas 
+      public static void cadastrarNotas(double notas[][][]){
+        for (int i=0; i< 5; i++){
+
+            System.out.println("\nNotas do aluno " + nomes[i]);
+
+            for(int j=0;j<5;j++){
+
+                System.out.println("\nMatéria: " + materia[j]);
+
+                for (int k=0; k<3; k++){
+                    System.out.print("Digite a nota " +(k+1) + ": ");
+                    notas[i][j][k] = sc.nextDouble();
+                }
+            }
+        }
+     }
+ 
+     // Função para mostrar as notas e a media dos alunos
+       public static void tabelaNotas() {
+        double soma,media;
+
+        System.out.println("Tabela de Notas:");
+
+        for (int i=0; i<nomes.length; i++){
+            System.out.println("\nAluno: " + nomes[i]);
+
+            for (int j=0; j<5; j++){
+                soma = 0;
+                System.out.print("Matéria: " + materia[j] + "\t");
+
+                for(int k=0;k<3;k++){
+                    System.out.print("Nota " + (k+1) + ": " + notas[i][j][k] + "\t");
+                    soma += notas[i][j][k];
+                }
+                media = soma / 3;
+                System.out.println("Média: " + media);
+            }
+        }
+    }
      
 }
