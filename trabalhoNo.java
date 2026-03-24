@@ -96,5 +96,37 @@ public class trabalhoNo {
             System.out.println(nome);
         }
     }
+
+    // Função para mostrar a maior media de um aluno 
+     public static void maiorMedia(){
+        double maior = 0;
+        String alunoMaior = "";
+
+        for(int i=0; i<5; i++){
+            double somaAluno = 0;
+
+            for(int j=0; j<5; j++){
+                double somaMateria = 0;
+
+                for(int k=0;k<3;k++){
+                    somaMateria += notas[i][j][k];
+                }
+
+                // Calcula a média da matéria e soma no total
+                somaAluno += somaMateria/3;
+            }
+
+            double media = somaAluno/5;
+
+            //  Se a média atual for maior, atualiza a maior média e o aluno
+            if(media > maior){
+                maior = media;
+                alunoMaior = nomes[i];
+            }
+        }
+
+        System.out.println("\nAluno com maior média: " + alunoMaior);
+        System.out.println("Média: " + maior);
+    }
      
 }
