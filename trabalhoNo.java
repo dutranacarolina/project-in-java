@@ -14,22 +14,33 @@ public class trabalhoNo {
 
      // Função para cadastrar Aluno
       public static void cadastrarAluno(String[] nomes){
+        try{
+            limparTela();
         for (int i=0; i < nomes.length; i++){
             System.out.print("Digite o nome do aluno " + (i+1) + ": ");
             nomes[i] = sc.nextLine();
+        } 
+         System.out.println("ENTER para continuar...");
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar dados.");
+            
         }
      }
 
      // Função para cadastrar materia 
        public static void cadastrarMateria(){
+        try {
         for(int i=0;i<5;i++){
             System.out.print("Digite o nome da matéria " + (i+1) + ": ");
             materia[i] = sc.nextLine();
+        } } catch (Exception e) {
+            System.out.println("Erro ao cadastrar dados.");
         }
      }
     
      // Função para Cadastrar Notas 
       public static void cadastrarNotas(double notas[][][]){
+        try {
         for (int i=0; i< 5; i++){
 
             System.out.println("\nNotas do aluno " + nomes[i]);
@@ -42,12 +53,15 @@ public class trabalhoNo {
                     System.out.print("Digite a nota " +(k+1) + ": ");
                     notas[i][j][k] = sc.nextDouble();
                 }
-            }
+            } 
+        }  } catch (Exception e) {
+             System.out.println("Erro ao cadastrar dados.");
         }
      }
  
      // Função para mostrar as notas e a media dos alunos
        public static void tabelaNotas() {
+        try {
         double soma,media;
 
         System.out.println("Tabela de Notas:");
@@ -66,11 +80,14 @@ public class trabalhoNo {
                 media = soma / 3;
                 System.out.println("Média: " + media);
             }
+        } } catch (Exception e) {
+             System.out.println("Erro ao cadastrar dados.");
         }
-    }
+    } 
 
     // Criando função para mostrar alunos aprovados
      public static void mostrarAprovados(){
+        try {
         // Apaga os aprovados antigos pra não duplicar
         aprovados.clear();
 
@@ -95,11 +112,15 @@ public class trabalhoNo {
 
         for(String nome : aprovados){
             System.out.println(nome);
+
+        }  } catch (Exception e) {
+            System.out.println("Erro ao cadastrar dados.");
         }
     }
 
     // Função para mostrar a maior media de um aluno 
      public static void maiorMedia(){
+        try {
         double maior = 0;
         String alunoMaior = "";
 
@@ -128,10 +149,15 @@ public class trabalhoNo {
 
         System.out.println("\nAluno com maior média: " + alunoMaior);
         System.out.println("Média: " + maior);
+
+         } catch (Exception e) {
+            System.out.println("Erro ao cadastrar dados.");
+        }
     }
 
     // Função para mostrar a media da turma toda
      public static void mediaTurma(){
+        try {
         double soma = 0;
         int totalNotas = 0;
 
@@ -147,10 +173,14 @@ public class trabalhoNo {
         double media = soma / totalNotas;
 
         System.out.println("\nMédia geral da turma: " + media);
+         } catch (Exception e) {
+            System.out.println("Erro ao cadastrar dados.");
+        }
     }
 
     // Função para mostrar a matéria com a maior média da turma
     public static void disciplinaMaiorMedia(){
+        try {
         double maior = 0;
         String disciplina = "";
 
@@ -175,11 +205,15 @@ public class trabalhoNo {
 
         System.out.println("\nDisciplina com maior média: " + disciplina);
         System.out.println("Média: " + maior);
+
+         } catch (Exception e) {
+             System.out.println("Erro ao cadastrar dados.");
+        }
     }
 
     // Função para mostrar alunos aprovados em oredem alfabética
      public static void aprovadosOrdem(){
-
+        try {
     // limpa a lista antes de usar
     aprovados.clear();
 
@@ -210,11 +244,15 @@ public class trabalhoNo {
 
         for(String nome : aprovados){
             System.out.println(nome);
+
+        }  } catch (Exception e) {
+           System.out.println("Erro ao cadastrar dados.");
         }
     }
 
     // Função para mostrar alunos reprovados em oredem alfabética
      public static void reprovadosOrdem(){
+        try {
         reprovados.clear();
 
         for(int i=0; i<5; i++){
@@ -244,8 +282,21 @@ public class trabalhoNo {
 
         for(String nome : reprovados){
             System.out.println(nome);
+
+        } } catch (Exception e) {
+            System.out.println("Erro ao cadastrar dados.");
         }
+
     }
+
+    // Função para limpár tela
+    public static void limparTela() {
+    try {
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    } catch (Exception e) {
+        System.out.println("Erro ao limpar a tela");
+    }
+ }
      public static void main(String[] args) {
         int opcao;
 
