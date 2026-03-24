@@ -18,5 +18,13 @@ public class trabalhoNo {
             nomes[i] = sc.nextLine();
         }
      }
+
+     // Função para cadastrar materia 
+       public static void cadastrarMateria(){
+        for(int i=0;i<5;i++){
+            System.out.print("Digite o nome da matéria " + (i+1) + ": ");
+            materia[i] = sc.nextLine();
+        }
+     }
      
 }
