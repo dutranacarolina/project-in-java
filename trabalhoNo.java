@@ -177,6 +177,7 @@ public class trabalhoNo {
         System.out.println("Média: " + maior);
     }
 
+    // Função para mostrar alunos aprovados em oredem alfabética
      public static void aprovadosOrdem(){
 
     // limpa a lista antes de usar
@@ -212,5 +213,116 @@ public class trabalhoNo {
         }
     }
 
-     
+    // Função para mostrar alunos reprovados em oredem alfabética
+     public static void reprovadosOrdem(){
+        reprovados.clear();
+
+        for(int i=0; i<5; i++){
+            double somaAluno = 0;
+
+            for(int j=0; j<5; j++){
+                double somaMateria = 0;
+
+                for(int k=0;k<3;k++){
+                    somaMateria += notas[i][j][k];
+                }
+
+                somaAluno += somaMateria/3;
+            }
+
+            double media = somaAluno/5;
+
+            if(media < 7){
+                reprovados.add(nomes[i]);
+            }
+        }
+        
+        // Coloca em oredem alfabética
+        Collections.sort(reprovados);
+
+        System.out.println("\nReprovados em ordem alfabética:");
+
+        for(String nome : reprovados){
+            System.out.println(nome);
+        }
+    }
+     public static void main(String[] args) {
+        int opcao;
+
+        do{
+
+            System.out.println("---------------------------------------------");
+            System.out.println("                MENU                         ");
+            System.out.println("---------------------------------------------");
+            System.out.println("1 - Cadastrar nomes dos alunos               ");
+            System.out.println("2 - Cadastrar materia                        ");
+            System.out.println("3 - Cadastrar notas dos alunos               ");
+            System.out.println("4 - Mostrar tabela de notas                  ");
+            System.out.println("5 - Mostrar alunos aprovados                 ");
+            System.out.println("6 - Mostrar aluno com maior média            ");
+            System.out.println("7 - Mostrar média geral da turma             ");
+            System.out.println("8 - Mostrar disciplina com maior média       ");
+            System.out.println("9 - Mostrar aprovados em ordem alfabética    ");
+            System.out.println("10 - Mostrar reprovados em ordem alfabética  ");
+            System.out.println("0 - Sair                                     ");
+            System.out.println("Escolha uma opção:");
+
+            opcao=sc.nextInt();
+            sc.nextLine();
+
+            switch (opcao) {
+
+                case 1:
+                    cadastrarAluno(nomes);
+                    break;
+
+                case 2:
+                    cadastrarMateria();
+                    break;
+
+                case 3:
+                    cadastrarNotas(notas);
+                    break;
+
+                case 4:
+                    tabelaNotas();
+                    break;
+
+                case 5:
+                    mostrarAprovados();
+                    break;
+
+                case 6:
+                    maiorMedia();
+                    break;
+
+                case 7:
+                    mediaTurma();
+                    break;
+
+                case 8:
+                    disciplinaMaiorMedia();
+                    break;
+
+                case 9:
+                    aprovadosOrdem();
+                    break;
+
+                case 10:
+                    reprovadosOrdem();
+                    break;
+
+                case 0:
+                    System.out.println("Encerrando o programa...");
+                    break;
+
+                default:
+                    System.out.println("Opção Inválida");
+                    break;
+            }
+
+        }while(opcao != 0);
+    }
 }
+    
+
