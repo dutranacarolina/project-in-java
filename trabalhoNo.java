@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class trabalhoNo {
@@ -175,5 +176,41 @@ public class trabalhoNo {
         System.out.println("\nDisciplina com maior média: " + disciplina);
         System.out.println("Média: " + maior);
     }
+
+     public static void aprovadosOrdem(){
+
+    // limpa a lista antes de usar
+    aprovados.clear();
+
+        for(int i=0; i<5; i++){ // alunos
+            double somaAluno = 0;
+
+            for(int j=0; j<5; j++){ // materia
+                double somaMateria = 0;
+
+                for(int k=0;k<3;k++){ // notas
+                    somaMateria += notas[i][j][k];
+                }
+
+                somaAluno += somaMateria/3;
+            }
+
+            double media = somaAluno/5;
+
+            if(media >= 7){
+                aprovados.add(nomes[i]);
+            }
+        }
+
+        // Coloca os nomes em ordem alfabética
+        Collections.sort(aprovados);
+
+        System.out.println("\nAprovados em ordem alfabética:");
+
+        for(String nome : aprovados){
+            System.out.println(nome);
+        }
+    }
+
      
 }
