@@ -67,5 +67,34 @@ public class trabalhoNo {
             }
         }
     }
+
+    // Criando função para mostrar alunos aprovados
+     public static void mostrarAprovados(){
+        // Apaga os aprovados antigos pra não duplicar
+        aprovados.clear();
+
+        for(int i=0; i<5; i++){
+            double somaAluno = 0; // Guardar a soma das médias das matérias
+
+            for(int j=0; j<5; j++){
+                double somaMateria = 0;// cada materia
+
+                for(int k=0;k<3;k++){
+                    somaMateria += notas[i][j][k];
+                }
+                somaAluno += somaMateria/3;
+            }
+            double media = somaAluno/5;
+
+            if(media >= 7){
+                aprovados.add(nomes[i]);
+            }
+        }
+        System.out.println("\nAlunos aprovados:");
+
+        for(String nome : aprovados){
+            System.out.println(nome);
+        }
+    }
      
 }
