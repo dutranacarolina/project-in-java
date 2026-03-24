@@ -128,5 +128,24 @@ public class trabalhoNo {
         System.out.println("\nAluno com maior média: " + alunoMaior);
         System.out.println("Média: " + maior);
     }
+
+    // Função para mostrar a media da turma toda
+     public static void mediaTurma(){
+        double soma = 0;
+        int totalNotas = 0;
+
+        for(int i=0; i<5; i++){ // alunos
+            for(int j=0; j<5; j++){ // matérias
+                for(int k=0;k<3;k++){ // notas
+                    soma += notas[i][j][k];
+                    totalNotas++;
+                }
+            }
+        }
+
+        double media = soma / totalNotas;
+
+        System.out.println("\nMédia geral da turma: " + media);
+    }
      
 }
