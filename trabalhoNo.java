@@ -147,5 +147,33 @@ public class trabalhoNo {
 
         System.out.println("\nMédia geral da turma: " + media);
     }
+
+    // Função para mostrar a matéria com a maior média da turma
+    public static void disciplinaMaiorMedia(){
+        double maior = 0;
+        String disciplina = "";
+
+        for(int j=0; j<5; j++){ // matéria
+            double soma = 0;
+            int total = 0;
+
+            for(int i=0; i<5; i++){ // alunos
+                for(int k=0;k<3;k++){ // notas
+                    soma += notas[i][j][k];
+                    total++;
+                }
+            }
+            double media = soma/total;
+
+            // // Se a média for maior, atualiza a disciplina com maior média
+            if(media > maior){
+                maior = media;
+                disciplina = materia[j];
+            }
+        }
+
+        System.out.println("\nDisciplina com maior média: " + disciplina);
+        System.out.println("Média: " + maior);
+    }
      
 }
