@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class trabalhoNo {
 
-    // Adicionando os vetores, matriz e listas
+  // Adicionando os vetores, matriz e listas
      static String nomes [] = new String[5];
      static String materia [] = new String[5];
      static double notas [][][] = new double[5][5][3];
@@ -13,35 +13,86 @@ public class trabalhoNo {
      static Scanner sc = new Scanner(System.in);
 
      // Função para cadastrar Aluno
-      public static void cadastrarAluno(String[] nomes){
-        try{
-            limparTela();
-        for (int i=0; i < nomes.length; i++){
-            System.out.print("Digite o nome do aluno " + (i+1) + ": ");
-            nomes[i] = sc.nextLine();
-        } 
-         System.out.println("ENTER para continuar...");
-        } catch (Exception e) {
-            System.out.println("Erro ao cadastrar dados.");
-            
+     public static void cadastrarAluno(String[] nomes) {
+    try {
+        limparTela();
+        System.out.println("\n - Cadastro de aluno\n");
+
+        for (int i = 0; i < nomes.length; i++) {
+            String nome;
+            boolean valido;
+
+            do {
+                System.out.print("Digite o nome do aluno " + (i + 1) + ": ");
+                nome = sc.nextLine();
+                valido = true;
+
+                // Verifica se está vazio
+                if (nome.trim().isEmpty()) {
+                    System.out.println("Erro: nome não pode ser vazio!\n");
+                    valido = false;
+                }
+
+                // Verifica se tem número
+                for (int j = 0; j < nome.length(); j++) {
+                    if (Character.isDigit(nome.charAt(j))) { // Pega cada letra do nome e vê se é número
+                        System.out.println("Erro: não pode ter números!\n");
+                        valido = false;
+                        break;
+                    }
+                }
+
+            } while (!valido);
+
+            nomes[i] = nome;
+            System.out.println();
         }
-     }
+
+        System.out.println("ENTER para continuar...");
+        sc.nextLine();
+
+    } catch (Exception e) {
+        System.out.println("Erro ao cadastrar dados.");
+    }
+}
 
      // Função para cadastrar materia 
-       public static void cadastrarMateria(){
-        try {
-        for(int i=0;i<5;i++){
-            System.out.print("Digite o nome da matéria " + (i+1) + ": ");
-            materia[i] = sc.nextLine();
-        } } catch (Exception e) {
-            System.out.println("Erro ao cadastrar dados.");
+      public static void cadastrarMateria() {
+    try {
+        limparTela();
+        System.out.println("\n - Cadastro de matéria\n");
+
+        for (int i = 0; i < 5; i++) {
+            String nomeMateria;
+
+            do {
+                System.out.print("Digite o nome da matéria " + (i + 1) + ": ");
+                nomeMateria = sc.nextLine();
+
+                if (nomeMateria.trim().isEmpty()) {
+                    System.out.println("Erro: o nome da matéria não pode ficar vazio!\n");
+                }
+
+            } while (nomeMateria.trim().isEmpty());
+
+            materia[i] = nomeMateria;
+            System.out.println(); // <-- pula linha (melhora visual)
         }
-     }
-    
+
+        System.out.println("ENTER para continuar...");
+        sc.nextLine();
+
+    } catch (Exception e) {
+        System.out.println("Erro ao cadastrar dados.");
+    }
+}
      // Função para Cadastrar Notas 
       public static void cadastrarNotas(double notas[][][]){
         try {
+            limparTela();
+        System.out.println("\n - Cadatro de notas\n");
         for (int i=0; i< 5; i++){
+            limparTela();
 
             System.out.println("\nNotas do aluno " + nomes[i]);
 
@@ -50,20 +101,35 @@ public class trabalhoNo {
                 System.out.println("\nMatéria: " + materia[j]);
 
                 for (int k=0; k<3; k++){
+                    double nota;
+
+                    do{
                     System.out.print("Digite a nota " +(k+1) + ": ");
-                    notas[i][j][k] = sc.nextDouble();
+                   nota= sc.nextDouble();
+
+                    if (nota >9){
+                        System.out.println("Erro: não pode ter mais de 1 dígitos!");
+                    }
+
+                    }while (nota >9);
+                    notas[i][j][k]= nota;
                 }
             } 
-        }  } catch (Exception e) {
-             System.out.println("Erro ao cadastrar dados.");
+        } 
+         System.out.println("ENTER para continuar...");
+          sc.nextLine();
+    
+        } catch (Exception e) {
+              System.out.println("Erro ao cadastrar dados.");
         }
      }
  
      // Função para mostrar as notas e a media dos alunos
        public static void tabelaNotas() {
         try {
+        limparTela();
         double soma,media;
-
+       
         System.out.println("Tabela de Notas:");
 
         for (int i=0; i<nomes.length; i++){
@@ -78,9 +144,13 @@ public class trabalhoNo {
                     soma += notas[i][j][k];
                 }
                 media = soma / 3;
-                System.out.println("Média: " + media);
+                System.out.printf("Média: %.2f ", media);
             }
-        } } catch (Exception e) {
+        } 
+         System.out.println("ENTER para continuar...");
+         sc.nextLine();
+
+        } catch (Exception e) {
              System.out.println("Erro ao cadastrar dados.");
         }
     } 
@@ -89,8 +159,9 @@ public class trabalhoNo {
      public static void mostrarAprovados(){
         try {
         // Apaga os aprovados antigos pra não duplicar
+        limparTela();
         aprovados.clear();
-
+        
         for(int i=0; i<5; i++){
             double somaAluno = 0; // Guardar a soma das médias das matérias
 
@@ -112,8 +183,12 @@ public class trabalhoNo {
 
         for(String nome : aprovados){
             System.out.println(nome);
+        } 
 
-        }  } catch (Exception e) {
+         System.out.println("ENTER para continuar...");
+         sc.nextLine();
+
+        } catch (Exception e) {
             System.out.println("Erro ao cadastrar dados.");
         }
     }
@@ -121,9 +196,10 @@ public class trabalhoNo {
     // Função para mostrar a maior media de um aluno 
      public static void maiorMedia(){
         try {
+        limparTela();
         double maior = 0;
         String alunoMaior = "";
-
+       
         for(int i=0; i<5; i++){
             double somaAluno = 0;
 
@@ -148,7 +224,11 @@ public class trabalhoNo {
         }
 
         System.out.println("\nAluno com maior média: " + alunoMaior);
-        System.out.println("Média: " + maior);
+        System.out.printf("Média: %.2f ",maior);
+
+
+        System.out.println("ENTER para continuar...");
+        sc.nextLine();
 
          } catch (Exception e) {
             System.out.println("Erro ao cadastrar dados.");
@@ -160,7 +240,7 @@ public class trabalhoNo {
         try {
         double soma = 0;
         int totalNotas = 0;
-
+        limparTela();
         for(int i=0; i<5; i++){ // alunos
             for(int j=0; j<5; j++){ // matérias
                 for(int k=0;k<3;k++){ // notas
@@ -172,7 +252,11 @@ public class trabalhoNo {
 
         double media = soma / totalNotas;
 
-        System.out.println("\nMédia geral da turma: " + media);
+        System.out.printf("\nMédia geral da turma: %.2f ", media);
+
+        System.out.println("ENTER para continuar...");
+        sc.nextLine();
+
          } catch (Exception e) {
             System.out.println("Erro ao cadastrar dados.");
         }
@@ -183,7 +267,8 @@ public class trabalhoNo {
         try {
         double maior = 0;
         String disciplina = "";
-
+        
+        limparTela();
         for(int j=0; j<5; j++){ // matéria
             double soma = 0;
             int total = 0;
@@ -204,7 +289,10 @@ public class trabalhoNo {
         }
 
         System.out.println("\nDisciplina com maior média: " + disciplina);
-        System.out.println("Média: " + maior);
+        System.out.printf("Média: %.2f ", maior);
+
+        System.out.println("ENTER para continuar...");
+        sc.nextLine();
 
          } catch (Exception e) {
              System.out.println("Erro ao cadastrar dados.");
@@ -215,6 +303,7 @@ public class trabalhoNo {
      public static void aprovadosOrdem(){
         try {
     // limpa a lista antes de usar
+    limparTela();
     aprovados.clear();
 
         for(int i=0; i<5; i++){ // alunos
@@ -244,8 +333,11 @@ public class trabalhoNo {
 
         for(String nome : aprovados){
             System.out.println(nome);
-
-        }  } catch (Exception e) {
+        } 
+        System.out.println("ENTER para continuar...");
+        sc.nextLine();
+    
+    } catch (Exception e) {
            System.out.println("Erro ao cadastrar dados.");
         }
     }
@@ -253,6 +345,7 @@ public class trabalhoNo {
     // Função para mostrar alunos reprovados em oredem alfabética
      public static void reprovadosOrdem(){
         try {
+        limparTela();
         reprovados.clear();
 
         for(int i=0; i<5; i++){
@@ -283,7 +376,12 @@ public class trabalhoNo {
         for(String nome : reprovados){
             System.out.println(nome);
 
-        } } catch (Exception e) {
+        }
+
+        System.out.println("ENTER para continuar...");
+        sc.nextLine();
+
+        } catch (Exception e) {
             System.out.println("Erro ao cadastrar dados.");
         }
 
@@ -301,7 +399,7 @@ public class trabalhoNo {
         int opcao;
 
         do{
-
+            limparTela();
             System.out.println("---------------------------------------------");
             System.out.println("                MENU                         ");
             System.out.println("---------------------------------------------");
