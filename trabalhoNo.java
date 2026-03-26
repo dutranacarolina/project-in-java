@@ -62,7 +62,7 @@ public class trabalhoNo {
         limparTela();
         System.out.println("\n - Cadastro de matéria\n");
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) { 
             String nomeMateria;
 
             do {
@@ -76,7 +76,7 @@ public class trabalhoNo {
             } while (nomeMateria.trim().isEmpty());
 
             materia[i] = nomeMateria;
-            System.out.println(); // <-- pula linha (melhora visual)
+            System.out.println(); 
         }
 
         System.out.println("ENTER para continuar...");
@@ -87,73 +87,103 @@ public class trabalhoNo {
     }
 }
      // Função para Cadastrar Notas 
-      public static void cadastrarNotas(double notas[][][]){
-        try {
-            limparTela();
-        System.out.println("\n - Cadatro de notas\n");
-        for (int i=0; i< 5; i++){
-            limparTela();
+     public static void cadastrarNotas(double notas[][][]) {
+    try {
+        limparTela();
+        System.out.println("\n - Cadastro de notas\n");
 
+        for (int i = 0; i < 5; i++) { // alunos
+            limparTela();
             System.out.println("\nNotas do aluno " + nomes[i]);
-
-            for(int j=0;j<5;j++){
-
-                System.out.println("\nMatéria: " + materia[j]);
-
-                for (int k=0; k<3; k++){
-                    double nota;
-
-                    do{
-                    System.out.print("Digite a nota " +(k+1) + ": ");
-                   nota= sc.nextDouble();
-
-                    if (nota >9){
-                        System.out.println("Erro: não pode ter mais de 1 dígitos!");
-                    }
-
-                    }while (nota >9);
-                    notas[i][j][k]= nota;
-                }
-            } 
-        } 
-         System.out.println("ENTER para continuar...");
-          sc.nextLine();
-    
-        } catch (Exception e) {
-              System.out.println("Erro ao cadastrar dados.");
-        }
-     }
  
+          for (int j = 0; j < 5; j++) { // matéria
+            System.out.println("\nMatéria: " + materia[j]);
+
+           for (int k = 0; k < 3; k++) { // 3 notas de cada materia
+                double nota;
+
+             while (true) { // Até o ususario digitar o num válido
+             System.out.print("Digite a nota " + (k + 1) + ": ");
+
+             try {
+              nota = sc.nextDouble();
+              sc.nextLine(); 
+
+             if (nota > 9) {
+                System.out.println("Erro: não pode ter mais de 2 dígito seguidos!");
+            } 
+             else if (nota < 0) {
+                System.out.println("Erro: nota não pode ser negativa!");
+            } 
+             else {
+                 break; // número válido
+            }
+
+             } catch (Exception e) {
+                 System.out.println("Erro: digite apenas números!");
+                 sc.nextLine(); 
+                }
+            }
+
+             notas[i][j][k] = nota;
+             }
+         }
+     }
+
+        System.out.println("\nPressione ENTER para continuar...");
+        sc.nextLine();
+
+    } catch (Exception e) {
+        System.out.println("Erro ao cadastrar dados.");
+    }
+}
      // Função para mostrar as notas e a media dos alunos
        public static void tabelaNotas() {
-        try {
+    try {
         limparTela();
-        double soma,media;
-       
-        System.out.println("Tabela de Notas:");
+        double soma, media;
 
-        for (int i=0; i<nomes.length; i++){
+        System.out.println("========== TABELA DE NOTAS ==========\n");
+
+        // Percorre todos os alunos
+        for (int i = 0; i < nomes.length; i++) {
             System.out.println("\nAluno: " + nomes[i]);
 
-            for (int j=0; j<5; j++){
-                soma = 0;
-                System.out.print("Matéria: " + materia[j] + "\t");
+            // Cabeçalho da tabela
+            System.out.printf("%-15s %-10s %-10s %-10s %-10s\n", 
+                              "Matéria", "Nota 1", "Nota 2", "Nota 3", "Média");
 
-                for(int k=0;k<3;k++){
-                    System.out.print("Nota " + (k+1) + ": " + notas[i][j][k] + "\t");
+            System.out.println("------------------------------------------------------------");
+
+            // Percorre as matérias
+            for (int j = 0; j < 5; j++) {
+                soma = 0; // zera a soma para cada matéria
+
+                // Soma as 3 notas
+                for (int k = 0; k < 3; k++) {
                     soma += notas[i][j][k];
                 }
-                media = soma / 3;
-                System.out.printf("Média: %.2f ", media);
-            }
-        } 
-         System.out.println("ENTER para continuar...");
-         sc.nextLine();
 
-        } catch (Exception e) {
-             System.out.println("Erro ao cadastrar dados.");
+                // Calcula a média
+                media = soma / 3;
+
+                // Exibe os dados formatados em forma de tabela
+                System.out.printf("%-15s %-10.2f %-10.2f %-10.2f %-10.2f\n",
+                        materia[j],          
+                        notas[i][j][0],      
+                        notas[i][j][1],       
+                        notas[i][j][2],      
+                        media);               
+            }
         }
-    } 
+
+        System.out.println("\nPressione ENTER para continuar...");
+        sc.nextLine();
+
+    } catch (Exception e) {
+        System.out.println("Erro ao mostrar tabela.");
+    }
+}
 
     // Criando função para mostrar alunos aprovados
      public static void mostrarAprovados(){
@@ -184,6 +214,7 @@ public class trabalhoNo {
         for(String nome : aprovados){
             System.out.println(nome);
         } 
+        sc.nextLine();
 
          System.out.println("ENTER para continuar...");
          sc.nextLine();
@@ -225,6 +256,7 @@ public class trabalhoNo {
 
         System.out.println("\nAluno com maior média: " + alunoMaior);
         System.out.printf("Média: %.2f ",maior);
+        sc.nextLine();
 
 
         System.out.println("ENTER para continuar...");
@@ -253,6 +285,7 @@ public class trabalhoNo {
         double media = soma / totalNotas;
 
         System.out.printf("\nMédia geral da turma: %.2f ", media);
+        sc.nextLine();
 
         System.out.println("ENTER para continuar...");
         sc.nextLine();
@@ -290,6 +323,7 @@ public class trabalhoNo {
 
         System.out.println("\nDisciplina com maior média: " + disciplina);
         System.out.printf("Média: %.2f ", maior);
+        sc.nextLine();
 
         System.out.println("ENTER para continuar...");
         sc.nextLine();
@@ -334,6 +368,8 @@ public class trabalhoNo {
         for(String nome : aprovados){
             System.out.println(nome);
         } 
+        sc.nextLine();
+
         System.out.println("ENTER para continuar...");
         sc.nextLine();
     
@@ -375,8 +411,9 @@ public class trabalhoNo {
 
         for(String nome : reprovados){
             System.out.println(nome);
-
         }
+        sc.nextLine();
+
 
         System.out.println("ENTER para continuar...");
         sc.nextLine();
